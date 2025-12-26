@@ -4,6 +4,7 @@
 
 // Reset Camera position and rotation to global defaults
 void resetPosition();
+void resetRotation();
 
 // Set default position to reset to
 void setGlobalPosition(Vec3 position);

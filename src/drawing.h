@@ -21,5 +21,3 @@ Vec3 rotate_xz_point_based(Vec3 p, float theta);
 Vec3 rotate_yz_point_based(Vec3 p, float phi);
 
 void frame(Vec3 cameraPosition, Rotation cameraRotation);
-
-void add_ui(Vec3 cameraPosition, Rotation cameraRotation);

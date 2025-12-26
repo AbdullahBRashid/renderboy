@@ -7,6 +7,8 @@
 #include "state.h"
 #include "consts.h"
 
+#include "UI/addUI.h"
+
 
 void configureWindow() {
     SetTargetFPS(FPS);
@@ -102,7 +104,7 @@ void mainLoop() {
     while (!WindowShouldClose()) {
         BeginDrawing();
             frame(cameraPosition, cameraRotation);
-            add_ui(cameraPosition, cameraRotation);
+            addUI(cameraPosition, cameraRotation);
         EndDrawing();
         
         frametime = GetFrameTime();

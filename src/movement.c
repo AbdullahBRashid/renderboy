@@ -3,6 +3,9 @@
 
 void resetPosition() {
     cameraPosition = globalPosition;
+}
+
+void resetRotation() {
     cameraRotation = globalRotation;
 }
 
