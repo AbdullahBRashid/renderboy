@@ -53,7 +53,7 @@ point rotate_xz_point_based(point p, float theta){
 void frame(float dx, float dy, float dz, float dtheta){
 
     ClearBackground(BLACK);
-    point projected_p1=project((rotate_xz_point_based(translate((point){0.5,0.5,0.5},dx,dy,dz), dtheta)));
+    point projected_p1=project((rotate_xz_point_based(translate((point){0.5,0.5,0.5},dx,dy,dz), dtheta)));//if i rotate then translate, it rotates the cube, but if i translate then rotate then my camera moves
     // draw_point(rotate_xz_point_based(screen(projected_p1) dtheta));
     point projected_p2=project(rotate_xz_point_based(translate((point){-0.5,0.5,0.5},dx,dy,dz), dtheta));
     // draw_point(rotate_xz_point_based(screen(projected_p2) dtheta));
@@ -174,30 +174,53 @@ int main() {
     float dz=1;
     float dx=0;
     float dy=0;
-    float angle=0;
+    float angle=0;//camera angle
     float frametime;
+    float speed;
+    //yaw variables
+    //moving forward or backward
+    float fx;//forward x-component
+    float fz;//forward y-component
+    //strafing
+    float rx;//right x-component
+    float rz;//right y-component
     InitWindow(WIDTH, HEIGHT, "Local Raylib");
     while (!WindowShouldClose()) {
         BeginDrawing();
         frame( dx,dy,dz,angle);
         EndDrawing();
         frametime = GetFrameTime();
-        if(IsKeyDown(KEY_S)){
-            dz+=1*frametime;
-        }if(IsKeyDown(KEY_W)){
-            dz-=1*frametime;
-        }if(IsKeyDown(KEY_A)){
-            dx+=1*frametime;
-        }if(IsKeyDown(KEY_D)){
-            dx-=1*frametime;
-        }if(IsKeyDown(KEY_SPACE)){
-            dy-=1*frametime;
+        speed = 1.0f * frametime;
+
+        fx = sin(angle);
+        fz = cos(angle);
+        rx = cos(angle);
+        rz = -sin(angle);
+
+        if (IsKeyDown(KEY_W)) {
+            dx -= fx * speed;
+            dz -= fz * speed;
+        }
+        if (IsKeyDown(KEY_S)) {
+            dx += fx * speed;
+            dz += fz * speed;
+        }
+        if (IsKeyDown(KEY_A)) {
+            dx += rx * speed;
+            dz += rz * speed;
+        }
+        if (IsKeyDown(KEY_D)) {
+            dx -= rx * speed;
+            dz -= rz * speed;
+        }
+        if(IsKeyDown(KEY_SPACE)){
+            dy-=speed;
         }if(IsKeyDown(KEY_LEFT_SHIFT)){
-            dy+=1*frametime;
+            dy+=speed;
         }if(IsKeyDown(KEY_RIGHT)){
-            angle+=2*frametime/2;
+            angle+=2*PI*speed/4;
         }if(IsKeyDown(KEY_LEFT)){
-            angle-=2*frametime/2;
+            angle-=2*PI*speed/4;
         }
         
         //dz+=1*frametime;
