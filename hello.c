@@ -186,7 +186,8 @@ int main() {
     //yaw variables
     //moving forward or backward
     float fx;//forward x-component
-    float fz;//forward y-component
+    float fy;//forward y-component
+    float fz;//forward z-component
     //strafing
     float rx;//right x-component
     float rz;//right y-component
@@ -198,17 +199,20 @@ int main() {
         frametime = GetFrameTime();
         speed = 1.0f * frametime;
 
-        fx = sin(yaw_angle);
-        fz = cos(yaw_angle);
+        fx = sin(yaw_angle)*cos(pitch_angle);
+        fy = sin(pitch_angle);
+        fz = cos(yaw_angle)*cos(pitch_angle);
         rx = cos(yaw_angle);
         rz = -sin(yaw_angle);
 
         if (IsKeyDown(KEY_W)) {
             dx -= fx * speed;
+            dy -= fy * speed;
             dz -= fz * speed;
         }
         if (IsKeyDown(KEY_S)) {
             dx += fx * speed;
+            dy += fy * speed;
             dz += fz * speed;
         }
         if (IsKeyDown(KEY_A)) {
