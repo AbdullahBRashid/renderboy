@@ -44,91 +44,91 @@ point rotate_xz_point_based(point p, float theta){
 void frame(float dx, float dy, float dz, float dtheta){
 
     ClearBackground(BLACK);
-    point projected_p1=project(translate(rotate_xz(0.25,0.25,0.25,0),dx,dy,dz));
+    point projected_p1=project(translate(rotate_xz(0.25,0.25,0.25,dtheta),dx,dy,dz));
     // draw_point(rotate_xz_point_based(screen(projected_p1),dtheta));
-    point projected_p2=project(translate(rotate_xz(-0.25,0.25,0.25,0),dx,dy,dz));
+    point projected_p2=project(translate(rotate_xz(-0.25,0.25,0.25,dtheta),dx,dy,dz));
     // draw_point(rotate_xz_point_based(screen(projected_p2),dtheta));
-    point projected_p3=project((translate(rotate_xz(0.25,-0.25,0.25,0),dx,dy,dz)));
+    point projected_p3=project((translate(rotate_xz(0.25,-0.25,0.25,dtheta),dx,dy,dz)));
     // draw_point(rotate_xz_point_based(screen(projected_p3),dtheta));
-    point projected_p4=project((translate(rotate_xz(-0.25,-0.25,0.25,0),dx,dy,dz)));
+    point projected_p4=project((translate(rotate_xz(-0.25,-0.25,0.25,dtheta),dx,dy,dz)));
     // draw_point(rotate_xz_point_based(screen(projected_p4),dtheta));
-    point projected_p5=project(translate(rotate_xz(0.25,0.25,-0.25,0),dx,dy,dz));
+    point projected_p5=project(translate(rotate_xz(0.25,0.25,-0.25,dtheta),dx,dy,dz));
     // draw_point(rotate_xz_point_based(screen(projected_p5),dtheta));
-    point projected_p6=project(translate(rotate_xz(-0.25,0.25,-0.25,0),dx,dy,dz));
+    point projected_p6=project(translate(rotate_xz(-0.25,0.25,-0.25,dtheta),dx,dy,dz));
     // draw_point(rotate_xz_point_based(screen(projected_p6),dtheta));
-    point projected_p7=project(translate(rotate_xz(0.25,-0.25,-0.25,0),dx,dy,dz));
+    point projected_p7=project(translate(rotate_xz(0.25,-0.25,-0.25,dtheta),dx,dy,dz));
     //draw_point(rotate_xz_point_based(screen(projected_p7),dtheta));
-    point projected_p8=project(translate(rotate_xz(-0.25,-0.25,-0.25,0),dx,dy,dz));
+    point projected_p8=project(translate(rotate_xz(-0.25,-0.25,-0.25,dtheta),dx,dy,dz));
     //draw_point(rotate_xz_point_based(screen(projected_p8),dtheta));
 
     //drawing lines:
-    DrawLine((int)(screen(rotate_xz_point_based((projected_p1),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p1),dtheta)).y),
-    (int)(screen(rotate_xz_point_based((projected_p2),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p2),dtheta)).y),
+    DrawLine((int)(screen((projected_p1)).x),
+    (int)(screen((projected_p1)).y),
+    (int)(screen((projected_p2)).x),
+    (int)(screen((projected_p2)).y),
     GREEN
     );
-    DrawLine((int)(screen(rotate_xz_point_based((projected_p1),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p1),dtheta)).y),
-    (int)(screen(rotate_xz_point_based((projected_p3),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p3),dtheta)).y),
+    DrawLine((int)(screen((projected_p1)).x),
+    (int)(screen((projected_p1)).y),
+    (int)(screen((projected_p3)).x),
+    (int)(screen((projected_p3)).y),
     GREEN
     );
-    DrawLine((int)(screen(rotate_xz_point_based((projected_p3),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p3),dtheta)).y),
-    (int)(screen(rotate_xz_point_based((projected_p4),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p4),dtheta)).y),
+    DrawLine((int)(screen((projected_p3)).x),
+    (int)(screen((projected_p3)).y),
+    (int)(screen((projected_p4)).x),
+    (int)(screen((projected_p4)).y),
     GREEN
     );
-    DrawLine((int)(screen(rotate_xz_point_based((projected_p2),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p2),dtheta)).y),
-    (int)(screen(rotate_xz_point_based((projected_p4),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p4),dtheta)).y),
+    DrawLine((int)(screen((projected_p2)).x),
+    (int)(screen((projected_p2)).y),
+    (int)(screen((projected_p4)).x),
+    (int)(screen((projected_p4)).y),
     GREEN
     );
-    DrawLine((int)(screen(rotate_xz_point_based((projected_p5),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p5),dtheta)).y),
-    (int)(screen(rotate_xz_point_based((projected_p6),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p6),dtheta)).y),
+    DrawLine((int)(screen((projected_p5)).x),
+    (int)(screen((projected_p5)).y),
+    (int)(screen((projected_p6)).x),
+    (int)(screen((projected_p6)).y),
     RAYWHITE
     );
-    DrawLine((int)(screen(rotate_xz_point_based((projected_p5),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p5),dtheta)).y),
-    (int)(screen(rotate_xz_point_based((projected_p7),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p7),dtheta)).y),
+    DrawLine((int)(screen((projected_p5)).x),
+    (int)(screen((projected_p5)).y),
+    (int)(screen((projected_p7)).x),
+    (int)(screen((projected_p7)).y),
     RAYWHITE
     );
-    DrawLine((int)(screen(rotate_xz_point_based((projected_p7),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p7),dtheta)).y),
-    (int)(screen(rotate_xz_point_based((projected_p8),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p8),dtheta)).y),
+    DrawLine((int)(screen((projected_p7)).x),
+    (int)(screen((projected_p7)).y),
+    (int)(screen((projected_p8)).x),
+    (int)(screen((projected_p8)).y),
     RAYWHITE
     );
-    DrawLine((int)(screen(rotate_xz_point_based((projected_p6),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p6),dtheta)).y),
-    (int)(screen(rotate_xz_point_based((projected_p8),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p8),dtheta)).y),
+    DrawLine((int)(screen((projected_p6)).x),
+    (int)(screen((projected_p6)).y),
+    (int)(screen((projected_p8)).x),
+    (int)(screen((projected_p8)).y),
     RAYWHITE
     );
-    DrawLine((int)(screen(rotate_xz_point_based((projected_p1),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p1),dtheta)).y),
-    (int)(screen(rotate_xz_point_based((projected_p5),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p5),dtheta)).y),
+    DrawLine((int)(screen((projected_p1)).x),
+    (int)(screen((projected_p1)).y),
+    (int)(screen((projected_p5)).x),
+    (int)(screen((projected_p5)).y),
     RAYWHITE
-    );DrawLine((int)(screen(rotate_xz_point_based((projected_p2),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p2),dtheta)).y),
-    (int)(screen(rotate_xz_point_based((projected_p6),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p6),dtheta)).y),
+    );DrawLine((int)(screen((projected_p2)).x),
+    (int)(screen((projected_p2)).y),
+    (int)(screen((projected_p6)).x),
+    (int)(screen((projected_p6)).y),
     RAYWHITE
-    );DrawLine((int)(screen(rotate_xz_point_based((projected_p3),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p3),dtheta)).y),
-    (int)(screen(rotate_xz_point_based((projected_p7),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p7),dtheta)).y),
+    );DrawLine((int)(screen((projected_p3)).x),
+    (int)(screen((projected_p3)).y),
+    (int)(screen((projected_p7)).x),
+    (int)(screen((projected_p7)).y),
     RAYWHITE
-    );DrawLine((int)(screen(rotate_xz_point_based((projected_p4),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p4),dtheta)).y),
-    (int)(screen(rotate_xz_point_based((projected_p8),dtheta)).x),
-    (int)(screen(rotate_xz_point_based((projected_p8),dtheta)).y),
+    );DrawLine((int)(screen((projected_p4)).x),
+    (int)(screen((projected_p4)).y),
+    (int)(screen((projected_p8)).x),
+    (int)(screen((projected_p8)).y),
     RAYWHITE
     );
 }
