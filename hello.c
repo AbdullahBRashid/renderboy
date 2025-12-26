@@ -4,6 +4,7 @@
 #define WIDTH 800
 #define HEIGHT 800
 #define FPS 120
+#define NEAR 0.1f
 
 typedef struct {
     float x;
@@ -21,8 +22,16 @@ point screen(point alpha){
 }
 
 point project(point alpha){
+    if (alpha.z <= NEAR) {
+        return (point){NAN, NAN, alpha.z}; // invalid projection
+    }
     return (point){alpha.x/alpha.z,alpha.y/alpha.z,alpha.z};
 }
+
+int valid(point p){
+    return !isnan(p.x) && !isnan(p.y);
+}
+
 
 void draw_point(point beta){
     int s=10; 
@@ -44,88 +53,114 @@ point rotate_xz_point_based(point p, float theta){
 void frame(float dx, float dy, float dz, float dtheta){
 
     ClearBackground(BLACK);
-    point projected_p1=project((rotate_xz_point_based(translate((point){0.25,0.25,0.25},dx,dy,dz),dtheta)));
-    // draw_point(rotate_xz_point_based(screen(projected_p1),dtheta));
-    point projected_p2=project(rotate_xz_point_based(translate((point){-0.25,0.25,0.25},dx,dy,dz),dtheta));
-    // draw_point(rotate_xz_point_based(screen(projected_p2),dtheta));
-    point projected_p3=project((rotate_xz_point_based(translate((point){0.25,-0.25,0.25},dx,dy,dz),dtheta)));
-    // draw_point(rotate_xz_point_based(screen(projected_p3),dtheta));
-    point projected_p4=project((rotate_xz_point_based(translate((point){-0.25,-0.25,0.25},dx,dy,dz),dtheta)));
-    // draw_point(rotate_xz_point_based(screen(projected_p4),dtheta));
-    point projected_p5=project(rotate_xz_point_based(translate((point){0.25,0.25,-0.25},dx,dy,dz),dtheta));
-    // draw_point(rotate_xz_point_based(screen(projected_p5),dtheta));
-    point projected_p6=project(rotate_xz_point_based(translate((point){-0.25,0.25,-0.25},dx,dy,dz),dtheta));
-    // draw_point(rotate_xz_point_based(screen(projected_p6),dtheta));
-    point projected_p7=project(rotate_xz_point_based(translate((point){0.25,-0.25,-0.25},dx,dy,dz),dtheta));
-    //draw_point(rotate_xz_point_based(screen(projected_p7),dtheta));
-    point projected_p8=project(rotate_xz_point_based(translate((point){-0.25,-0.25,-0.25},dx,dy,dz),dtheta));
-    //draw_point(rotate_xz_point_based(screen(projected_p8),dtheta));
+    point projected_p1=project((rotate_xz_point_based(translate((point){0.5,0.5,0.5},dx,dy,dz), dtheta)));
+    // draw_point(rotate_xz_point_based(screen(projected_p1) dtheta));
+    point projected_p2=project(rotate_xz_point_based(translate((point){-0.5,0.5,0.5},dx,dy,dz), dtheta));
+    // draw_point(rotate_xz_point_based(screen(projected_p2) dtheta));
+    point projected_p3=project((rotate_xz_point_based(translate((point){0.5,-0.5,0.5},dx,dy,dz), dtheta)));
+    // draw_point(rotate_xz_point_based(screen(projected_p3) dtheta));
+    point projected_p4=project((rotate_xz_point_based(translate((point){-0.5,-0.5,0.5},dx,dy,dz), dtheta)));
+    // draw_point(rotate_xz_point_based(screen(projected_p4) dtheta));
+    point projected_p5=project(rotate_xz_point_based(translate((point){0.5,0.5,-0.5},dx,dy,dz), dtheta));
+    // draw_point(rotate_xz_point_based(screen(projected_p5) dtheta));
+    point projected_p6=project(rotate_xz_point_based(translate((point){-0.5,0.5,-0.5},dx,dy,dz), dtheta));
+    // draw_point(rotate_xz_point_based(screen(projected_p6) dtheta));
+    point projected_p7=project(rotate_xz_point_based(translate((point){0.5,-0.5,-0.5},dx,dy,dz), dtheta));
+    //draw_point(rotate_xz_point_based(screen(projected_p7) dtheta));
+    point projected_p8=project(rotate_xz_point_based(translate((point){-0.5,-0.5,-0.5},dx,dy,dz), dtheta));
+    //draw_point(rotate_xz_point_based(screen(projected_p8) dtheta));
 
     //drawing lines:
-    DrawLine((int)(screen((projected_p1)).x),
-    (int)(screen((projected_p1)).y),
-    (int)(screen((projected_p2)).x),
-    (int)(screen((projected_p2)).y),
-    GREEN
-    );
+    if (valid(projected_p1) && valid(projected_p2))
+        DrawLine((int)(screen((projected_p1)).x),
+        (int)(screen((projected_p1)).y),
+        (int)(screen((projected_p2)).x),
+        (int)(screen((projected_p2)).y),
+        GREEN
+        );
+    
+    if (valid(projected_p1) && valid(projected_p3))
     DrawLine((int)(screen((projected_p1)).x),
     (int)(screen((projected_p1)).y),
     (int)(screen((projected_p3)).x),
     (int)(screen((projected_p3)).y),
     GREEN
     );
+
+    if (valid(projected_p3) && valid(projected_p4))
     DrawLine((int)(screen((projected_p3)).x),
     (int)(screen((projected_p3)).y),
     (int)(screen((projected_p4)).x),
     (int)(screen((projected_p4)).y),
     GREEN
     );
+
+    if (valid(projected_p2) && valid(projected_p4))
     DrawLine((int)(screen((projected_p2)).x),
     (int)(screen((projected_p2)).y),
     (int)(screen((projected_p4)).x),
     (int)(screen((projected_p4)).y),
     GREEN
     );
+
+    if (valid(projected_p5) && valid(projected_p6))
     DrawLine((int)(screen((projected_p5)).x),
     (int)(screen((projected_p5)).y),
     (int)(screen((projected_p6)).x),
     (int)(screen((projected_p6)).y),
     RAYWHITE
     );
+
+    if (valid(projected_p5) && valid(projected_p7))
     DrawLine((int)(screen((projected_p5)).x),
     (int)(screen((projected_p5)).y),
     (int)(screen((projected_p7)).x),
     (int)(screen((projected_p7)).y),
     RAYWHITE
     );
+
+    if (valid(projected_p7) && valid(projected_p8))
     DrawLine((int)(screen((projected_p7)).x),
     (int)(screen((projected_p7)).y),
     (int)(screen((projected_p8)).x),
     (int)(screen((projected_p8)).y),
     RAYWHITE
     );
+
+    if (valid(projected_p6) && valid(projected_p8))
     DrawLine((int)(screen((projected_p6)).x),
     (int)(screen((projected_p6)).y),
     (int)(screen((projected_p8)).x),
     (int)(screen((projected_p8)).y),
     RAYWHITE
     );
+
+    if (valid(projected_p1) && valid(projected_p5))
     DrawLine((int)(screen((projected_p1)).x),
     (int)(screen((projected_p1)).y),
     (int)(screen((projected_p5)).x),
     (int)(screen((projected_p5)).y),
     RAYWHITE
-    );DrawLine((int)(screen((projected_p2)).x),
+    );
+    
+    if (valid(projected_p2) && valid(projected_p6))
+    DrawLine((int)(screen((projected_p2)).x),
     (int)(screen((projected_p2)).y),
     (int)(screen((projected_p6)).x),
     (int)(screen((projected_p6)).y),
     RAYWHITE
-    );DrawLine((int)(screen((projected_p3)).x),
+    );
+    
+    if (valid(projected_p3) && valid(projected_p7))
+    DrawLine((int)(screen((projected_p3)).x),
     (int)(screen((projected_p3)).y),
     (int)(screen((projected_p7)).x),
     (int)(screen((projected_p7)).y),
     RAYWHITE
-    );DrawLine((int)(screen((projected_p4)).x),
+    );
+    
+    if (valid(projected_p4) && valid(projected_p8))
+    DrawLine((int)(screen((projected_p4)).x),
     (int)(screen((projected_p4)).y),
     (int)(screen((projected_p8)).x),
     (int)(screen((projected_p8)).y),
@@ -160,9 +195,9 @@ int main() {
         }if(IsKeyDown(KEY_LEFT_SHIFT)){
             dy+=1*frametime;
         }if(IsKeyDown(KEY_RIGHT)){
-            angle+=2*frametime/4;
+            angle+=2*frametime/2;
         }if(IsKeyDown(KEY_LEFT)){
-            angle-=2*frametime/4;
+            angle-=2*frametime/2;
         }
         
         //dz+=1*frametime;
